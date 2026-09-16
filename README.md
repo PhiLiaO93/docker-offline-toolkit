@@ -38,9 +38,10 @@ sh prepare-bundle.sh \
 
 ## 2. 部署前检查
 
-将完整离线包复制到目标机，进入目录后执行：
+将完整离线包复制到目标机。若直接在制包机部署，先进入生成目录：
 
 ```bash
+cd dist/docker-offline-26.1.4
 sudo sh install.sh --check-only
 ```
 

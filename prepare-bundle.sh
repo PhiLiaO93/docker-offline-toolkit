@@ -185,4 +185,4 @@ mv "$STAGING_DIR" "$OUTPUT"
 STAGING_DIR=
 
 printf '%s\n' "[INFO] 双架构离线包已生成：$OUTPUT"
-printf '%s\n' "[INFO] 转移到目标机后先运行：sudo sh install.sh --check-only"
+printf '%s\n' "[INFO] 转移到目标机并进入该目录后，先运行：sudo sh install.sh --check-only"

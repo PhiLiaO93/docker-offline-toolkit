@@ -265,6 +265,27 @@ verify_artifact() {
 system_name=$(uname -s)
 [ "$system_name" = Linux ] || die "仅支持 Linux，当前为：$system_name"
 
+if [ ! -f "$SCRIPT_DIR/BUNDLE-VERSIONS" ]; then
+    bundle_hint=
+    bundle_count=0
+    for candidate in "$SCRIPT_DIR"/dist/docker-offline-*; do
+        [ -d "$candidate" ] && [ -f "$candidate/BUNDLE-VERSIONS" ] || continue
+        bundle_hint=$candidate
+        bundle_count=$((bundle_count + 1))
+    done
+    case "$bundle_count" in
+        0)
+            die "当前目录不是完整离线包；请先运行 sh prepare-bundle.sh，再进入生成目录执行安装"
+            ;;
+        1)
+            die "当前目录是源码目录；请执行：cd \"$bundle_hint\"，然后运行 sudo sh install.sh --check-only"
+            ;;
+        *)
+            die "当前目录是源码目录且存在多个离线包；请选择 dist/docker-offline-<版本> 目录后再运行 install.sh"
+            ;;
+    esac
+fi
+
 machine_arch=$(uname -m)
 case "$machine_arch" in
     x86_64|amd64)
