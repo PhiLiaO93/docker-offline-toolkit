@@ -1,0 +1,9 @@
+{
+  "data-root": "/var/lib/docker",
+  "log-driver": "local",
+  "log-opts": {
+    "max-size": "20m",
+    "max-file": "5"
+  }
+}
+
